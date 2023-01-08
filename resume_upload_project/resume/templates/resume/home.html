@@ -1,0 +1,48 @@
+{% extends 'resume/base.html' %}
+
+
+
+{% block title %}
+<title>Home Page</title>
+{% endblock title %}
+
+
+
+{% block css %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+$( function() {
+  $( "#id_D_o_b" ).datepicker({changeMonth:true,changeYear:true,yearRange:'1950:2022'});
+  
+} );
+</script>
+{% endblock css %}
+
+
+{% block body %}
+
+<div class="container my-3">
+
+    <div class="text-center p-2 mb-3 shadow">
+        <h4 class="fw-bold">Resume Upload Form</h4>
+    </div>
+    <div class="container p-3 shadow">
+        <form action="{% url 'home' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for fm in form %}
+            <div class="form-group mb-3">
+                {{fm.label_tag}}{{fm}}
+            </div>
+            {% endfor %}
+            <div class="form-group mb-3">
+                <button class="btn btn-success me-4" type="submit">Submit</button>
+                <button class="btn btn-primary me-4" type="reset">Reset</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+{% endblock body %}

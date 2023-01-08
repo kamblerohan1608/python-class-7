@@ -1,0 +1,199 @@
+{% extends 'resume/base.html' %}
+
+{% load static %}
+
+{% block css %}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+$( function() {
+  $( "#D_o_b" ).datepicker({changeMonth:true,changeYear:true,yearRange:'1950:2022',dateFormat: 'yy-mm-dd' });
+  
+} );
+</script>
+{% endblock css %}
+
+{% block title %}
+
+<title>Update Page</title>
+
+{% endblock title %}
+
+
+{% block body %}
+
+<div class="container my-3">
+
+    <div class="text-center p-2 mb-3 shadow">
+        <h4 class="fw-bold">Resume Update Form</h4>
+    </div>
+
+    <div class="container p-3 shadow">
+        {% for d in data %}
+        <form action="{% url 'update' d.id %}" method="post">
+            {% csrf_token %}
+
+
+            <div class="form-group mb-3">
+                <img src="{{d.profile_photo.url}}" alt="No Image" height="200px">
+            </div>
+            
+            
+            <div class="form-group mb-3">
+                <label for="fname">First Name :</label>
+                <input class="form-control" type="text" name="fname" id="fname" value="{{d.fname}}" maxlength="100" required>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="lname">Last Name :</label>
+                <input class="form-control" type="text" name="lname" id="lname" value="{{d.lname}}" maxlength="100" required>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="D_o_b">Date Of Birth :</label>
+                <input class="form-control" type='text' name="D_o_b" id="D_o_b"  maxlength="100" required value="{{ d.D_o_b }}">
+            </div>
+<!-- 
+            <div class="form-group mb-3">
+                <label for="gender" >Gender :</label>
+                <div>
+                <input type="radio" name="gender" id="male" maxlength="100" value="male" required> Male
+                </div>
+                <div>
+                <input type="radio" name="gender" id="female" maxlength="100" value="female" required> Female
+                </div>
+                <div>
+                <input type="radio" name="gender" id="not_to_prefer" maxlength="100" value="not_to_prefer" required> Not To Prefer
+                </div>
+            </div> -->
+
+            <!-- <div class="form-group mb-3">
+                <label for="language">Language :</label>
+                <div>
+                <input type="checkbox" name="language" id="hindi" value="hindi"> Hindi
+                </div>
+                <div>
+                <input type="checkbox" name="language" id="english" value="english"> English
+                </div>
+                <div>
+                <input type="checkbox" name="language" id="marathi" value="marathi"> Marathi
+                </div>
+            </div> -->
+
+            <div class="form-group mb-3">
+                <label for="locality">Locality :</label>
+                <input class="form-control" type="text" name="locality" id="locality" value="{{d.locality}}" maxlength="100" required>
+            </div>
+
+            <!-- <div class="form-group mb-3">
+                <label for="city">City :</label>
+                <select class="form-control" name="city" id="city">
+
+                    <option value="" selected="">---------</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Vashi">Vashi</option>
+                    <option value="Dadar">Dadar</option>
+                    <option value="Virar">Virar</option>
+                    <option value="Thane">Thane</option>
+                    <option value="Kurla">Kurla</option>
+
+                </select>
+            </div> -->
+
+            <!-- <div class="form-group mb-3">
+                <label for="state">State :</label>
+                <select class="form-control" name="state" id="state">                                    
+                <option value="" selected="">---------</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Arunachal Pradesh ">Arunachal Pradesh </option>
+                <option value="Assam">Assam</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Chhattisgarh">Chhattisgarh</option>
+                <option value="Goa">Goa</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Haryana">Haryana</option>
+                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                <option value="Jammu and Kashmir ">Jammu and Kashmir </option>
+                <option value="Jharkhand">Jharkhand</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Manipur">Manipur</option>
+                <option value="Meghalaya">Meghalaya</option>
+                <option value="Mizoram">Mizoram</option>
+                <option value="Nagaland">Nagaland</option>
+                <option value="Odisha">Odisha</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Sikkim">Sikkim</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Tripura">Tripura</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="Uttarakhand">Uttarakhand</option>
+                <option value="West Bengal">West Bengal</option>
+                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                <option value="Chandigarh">Chandigarh</option>
+                <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+                <option value="Daman and Diu">Daman and Diu</option>
+                <option value="Lakshadweep">Lakshadweep</option>
+                <option value="Puducherry">Puducherry</option>
+                <option value="National Capital Territory of Delhi">National Capital Territory of Delhi</option>
+
+                </select>
+            </div> -->
+
+            <div class="form-group mb-3">
+                <label for="pin">Pin Code :</label>
+                <input class="form-control" type="text" name="pin" id="pin" value="{{d.pin}}" maxlength="100" required>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="contact">Contact :</label>
+                <input class="form-control" type="text" name="contact" id="contact" value="{{d.contact}}" maxlength="100" required>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="email">Email Id :</label>
+                <input class="form-control" type="text" name="email" id="email" value="{{d.email}}" maxlength="100" required>
+            </div>
+
+            <!-- <div class="form-group mb-3">
+                
+                <label for="prefered_language">Prefered Languages :</label>
+                <div>
+                <input type="checkbox" name="prefered_language" id="python" value="python"> Python
+                </div>
+                <div>
+                <input type="checkbox" name="prefered_language" id="javascript" value="javascript"> Javascript
+                </div>
+                <div>
+                <input type="checkbox" name="prefered_language" id="HTML" value="HTML"> HTML
+                </div>
+                <div>
+                <input type="checkbox" name="prefered_language" id="css" value="css"> CSS
+                </div>
+                <div>
+                <input type="checkbox" name="prefered_language" id="bootstrap" value="bootstrap"> Bootstrap
+                </div>
+            </div> -->
+
+            <!-- <div class="form-group mb-3">
+                <label for="profile_photo">Profile Photo :</label>
+                <input type="file" name="profile_photo" id="profile_photo" accept="image/*" required >
+            </div> -->
+
+            <div class="form-group mb-3">
+                <button class="btn btn-success me-4" type="submit">Update</button>
+                <button class="btn btn-primary me-4" type="reset">Reset</button>
+            </div>
+        </form>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock body %}
